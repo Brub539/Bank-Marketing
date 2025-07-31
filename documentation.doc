@@ -1,0 +1,359 @@
+PS D:\projetos vs\Bank Marketing> python run_pipeline.py
+Dataset loaded successfully!
+Starting data preprocessing...
+New feature 'was_contacted_before' created from 'pdays'.
+Dropped 'duration' and 'pdays' columns.
+Data split into 2/3 training and 1/3 testing sets.
+Preprocessor saved to 'models/preprocessor.joblib'
+Preprocessing complete.
+
+Processed Training Data Shape: (30140, 50)
+Processed Test Data Shape: (15071, 50)
+Number of features after preprocessing: 50
+
+New processed data saved to 'data/processed/' directory.
+
+
+
+
+
+PS D:\projetos vs\Bank Marketing> python src\train_baseline.py
+Loading preprocessed data...
+Training Logistic Regression model...
+Evaluating the model...
+
+Classification Report:
+               precision    recall  f1-score   support
+
+ No (deposit)       0.94      0.77      0.85     13308
+Yes (deposit)       0.27      0.63      0.38      1763
+
+     accuracy                           0.76     15071
+    macro avg       0.60      0.70      0.61     15071
+ weighted avg       0.86      0.76      0.79     15071
+
+
+Classification report saved to 'results/logistic_regression/classification_report.txt'
+Confusion matrix plot saved to 'results/logistic_regression/confusion_matrix.png'
+ROC curve plot saved to 'results/logistic_regression/roc_curve.png'
+Saving the trained model...
+Model saved to 'models/logistic_regression/model.joblib'
+
+Baseline modeling complete!
+
+
+
+
+
+S D:\projetos vs\Bank Marketing> python src\train_random_forest.py
+Loading preprocessed data...
+Training Random Forest model...
+Evaluating the model...
+
+Classification Report:
+               precision    recall  f1-score   support
+
+ No (deposit)       0.90      0.98      0.94     13308
+Yes (deposit)       0.65      0.22      0.33      1763
+
+     accuracy                           0.89     15071
+    macro avg       0.78      0.60      0.63     15071
+ weighted avg       0.87      0.89      0.87     15071
+
+
+Classification report saved to 'results/random_forest/classification_report.txt'
+Confusion matrix plot saved to 'results/random_forest/confusion_matrix.png'
+ROC curve plot saved to 'results/random_forest/roc_curve.png'
+Saving the trained model...
+Model saved to 'models/random_forest/model.joblib'
+
+Random Forest modeling complete!
+
+
+
+
+
+Loading preprocessed data...
+[I 2025-07-31 19:12:24,249] A new study created in memory with name: no-name-628b8ddc-6d8c-4017-9c1a-997b5f507ebd
+Data loaded successfully.
+Starting hyperparameter tuning with Optuna...
+[I 2025-07-31 19:12:50,697] Trial 0 finished with value: 0.4326587416159179 and parameters: {'lambda_l1': 0.01907694931503451, 'lambda_l2': 0.00032928716072558713, 'num_leaves': 253, 'feature_fraction': 0.8548689575590809, 'bagging_fraction': 0.6155249432683412, 'bagging_freq': 3, 'min_child_samples': 43}. Best is trial 0 with value: 0.4326587416159179.
+[I 2025-07-31 19:13:05,221] Trial 1 finished with value: 0.4386768155241613 and parameters: {'lambda_l1': 0.00019108864136132246, 'lambda_l2': 1.5129468089808083e-05, 'num_leaves': 24, 'feature_fraction': 0.924710737862894, 'bagging_fraction': 0.9374967536442066, 'bagging_freq': 4, 'min_child_samples': 69}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:13:21,569] Trial 2 finished with value: 0.4357425024518805 and parameters: {'lambda_l1': 0.0006060455756467954, 'lambda_l2': 0.026376349162441477, 'num_leaves': 204, 'feature_fraction': 0.9584420377036085, 'bagging_fraction': 0.8491598264921585, 'bagging_freq': 4, 'min_child_samples': 10}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:13:39,989] Trial 3 finished with value: 0.41894790166775786 and parameters: {'lambda_l1': 0.3121738865281216, 'lambda_l2': 0.0008497961348766305, 'num_leaves': 45, 'feature_fraction': 0.5878971596331602, 'bagging_fraction': 0.484712094822063, 'bagging_freq': 2, 'min_child_samples': 35}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:13:56,868] Trial 4 finished with value: 0.4297294787474172 and parameters: {'lambda_l1': 1.6926903249540447e-05, 'lambda_l2': 0.0029102971625819315, 'num_leaves': 248, 'feature_fraction': 0.42403748590143653, 'bagging_fraction': 0.6819511529937012, 'bagging_freq': 7, 'min_child_samples': 11}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:14:28,924] Trial 5 finished with value: 0.4238219047189144 and parameters: {'lambda_l1': 0.0004881868963006688, 'lambda_l2': 8.565239600805882, 'num_leaves': 168, 'feature_fraction': 0.4841232126276111, 'bagging_fraction': 0.6512906549899449, 'bagging_freq': 2, 'min_child_samples': 64}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:14:45,102] Trial 6 finished with value: 0.43654193219133275 and parameters: {'lambda_l1': 0.0361306480166918, 'lambda_l2': 8.776635711334738e-05, 'num_leaves': 216, 'feature_fraction': 0.9588126993282589, 'bagging_fraction': 0.93390188245626, 'bagging_freq': 7, 'min_child_samples': 31}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:14:58,980] Trial 7 finished with value: 0.42113669126912595 and parameters: {'lambda_l1': 9.339551125086382e-05, 'lambda_l2': 0.00021000308292806714, 'num_leaves': 80, 'feature_fraction': 0.6509146140960883, 'bagging_fraction': 0.40784889052938356, 'bagging_freq': 7, 'min_child_samples': 38}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:15:25,081] Trial 8 finished with value: 0.4265487721963862 and parameters: {'lambda_l1': 1.38701480229024, 'lambda_l2': 2.203310441645424e-06, 'num_leaves': 255, 'feature_fraction': 0.4988571284837423, 'bagging_fraction': 0.6322283105852751, 'bagging_freq': 4, 'min_child_samples': 71}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:15:44,814] Trial 9 finished with value: 0.4242329456968245 and parameters: {'lambda_l1': 0.04768484776861623, 'lambda_l2': 3.9048793470502747e-07, 'num_leaves': 129, 'feature_fraction': 0.4935994973141212, 'bagging_fraction': 0.7016754912218268, 'bagging_freq': 1, 'min_child_samples': 59}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:15:53,793] Trial 10 finished with value: 0.43855091887489905 and parameters: {'lambda_l1': 2.9034970331073245e-08, 'lambda_l2': 5.2236004382474796e-08, 'num_leaves': 7, 'feature_fraction': 0.7959178971209182, 'bagging_fraction': 0.97499552699761, 'bagging_freq': 5, 'min_child_samples': 94}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:15:58,827] Trial 11 finished with value: 0.39428649886129563 and parameters: {'lambda_l1': 1.4064714964976446e-08, 'lambda_l2': 1.5696971809818537e-08, 'num_leaves': 2, 'feature_fraction': 0.8032034588450626, 'bagging_fraction': 0.9735346588968343, 'bagging_freq': 5, 'min_child_samples': 98}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:16:11,050] Trial 12 finished with value: 0.4363136981501678 and parameters: {'lambda_l1': 4.322122723370711e-08, 'lambda_l2': 1.4463716183395593e-08, 'num_leaves': 15, 'feature_fraction': 0.7850545655831253, 'bagging_fraction': 0.8399235516034563, 'bagging_freq': 5, 'min_child_samples': 89}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:16:31,297] Trial 13 finished with value: 0.4282695364777472 and parameters: {'lambda_l1': 9.590567742065674e-07, 'lambda_l2': 2.6691698774379297e-06, 'num_leaves': 78, 'feature_fraction': 0.8688906948604025, 'bagging_fraction': 0.8646007409434826, 'bagging_freq': 5, 'min_child_samples': 81}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:16:51,012] Trial 14 finished with value: 0.4326814210301742 and parameters: {'lambda_l1': 1.022154164740208e-06, 'lambda_l2': 2.648459362034497e-07, 'num_leaves': 49, 'feature_fraction': 0.7155497300736774, 'bagging_fraction': 0.9813014211237594, 'bagging_freq': 6, 'min_child_samples': 77}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:17:23,005] Trial 15 finished with value: 0.4257711865632647 and parameters: {'lambda_l1': 8.482439309194342, 'lambda_l2': 8.532823041532799e-06, 'num_leaves': 112, 'feature_fraction': 0.9957645586759832, 'bagging_fraction': 0.7766166615196288, 'bagging_freq': 3, 'min_child_samples': 96}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:17:39,759] Trial 16 finished with value: 0.4298455467621142 and parameters: {'lambda_l1': 5.890830485881488e-07, 'lambda_l2': 0.060043841667699556, 'num_leaves': 37, 'feature_fraction': 0.8944844294486192, 'bagging_fraction': 0.9107290005813083, 'bagging_freq': 6, 'min_child_samples': 86}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:17:54,588] Trial 17 finished with value: 0.4300250706258605 and parameters: {'lambda_l1': 1.564270080375743e-05, 'lambda_l2': 1.7289079810682106e-07, 'num_leaves': 76, 'feature_fraction': 0.7322123365196511, 'bagging_fraction': 0.7825227612718616, 'bagging_freq': 3, 'min_child_samples': 50}. Best is trial 1 with value: 0.4386768155241613.
+[I 2025-07-31 19:18:10,102] Trial 18 finished with value: 0.4391493109614636 and parameters: {'lambda_l1': 0.002857956400061448, 'lambda_l2': 2.4389807513796807e-05, 'num_leaves': 26, 'feature_fraction': 0.7754138402381395, 'bagging_fraction': 0.9927216874388134, 'bagging_freq': 6, 'min_child_samples': 70}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:18:27,202] Trial 19 finished with value: 0.4320348653044322 and parameters: {'lambda_l1': 0.004473402880406456, 'lambda_l2': 1.174164225365495e-05, 'num_leaves': 147, 'feature_fraction': 0.928692634938562, 'bagging_fraction': 0.7704651967457649, 'bagging_freq': 6, 'min_child_samples': 69}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:18:48,539] Trial 20 finished with value: 0.4358081887352899 and parameters: {'lambda_l1': 0.0010596475609425328, 'lambda_l2': 1.9739102444732817e-05, 'num_leaves': 106, 'feature_fraction': 0.626311065549434, 'bagging_fraction': 0.9134345481081467, 'bagging_freq': 4, 'min_child_samples': 53}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:19:06,505] Trial 21 finished with value: 0.43753656794043233 and parameters: {'lambda_l1': 2.593482578397719e-05, 'lambda_l2': 8.135652713022103e-07, 'num_leaves': 23, 'feature_fraction': 0.8025410242569648, 'bagging_fraction': 0.9981136080029475, 'bagging_freq': 5, 'min_child_samples': 76}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:19:33,752] Trial 22 finished with value: 0.4365658128737658 and parameters: {'lambda_l1': 1.3247110359994631e-07, 'lambda_l2': 7.28322961221118e-08, 'num_leaves': 61, 'feature_fraction': 0.7631921144814906, 'bagging_fraction': 0.9362220022883029, 'bagging_freq': 6, 'min_child_samples': 89}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:19:46,053] Trial 23 finished with value: 0.4335282543007507 and parameters: {'lambda_l1': 0.005648331150978636, 'lambda_l2': 3.735267452634444e-05, 'num_leaves': 3, 'feature_fraction': 0.8393988387500945, 'bagging_fraction': 0.8754240169772727, 'bagging_freq': 4, 'min_child_samples': 62}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:20:19,134] Trial 24 finished with value: 0.4361102797735665 and parameters: {'lambda_l1': 3.797467117053506e-06, 'lambda_l2': 0.02122510287466638, 'num_leaves': 28, 'feature_fraction': 0.6771118521709195, 'bagging_fraction': 0.9966608905800064, 'bagging_freq': 5, 'min_child_samples': 82}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:20:47,586] Trial 25 finished with value: 0.4351442061148834 and parameters: {'lambda_l1': 0.0001389912609566609, 'lambda_l2': 0.0023905434568656267, 'num_leaves': 21, 'feature_fraction': 0.9227831827523018, 'bagging_fraction': 0.9382575311282378, 'bagging_freq': 6, 'min_child_samples': 71}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:21:15,582] Trial 26 finished with value: 0.42775903504010043 and parameters: {'lambda_l1': 0.25296611140793884, 'lambda_l2': 1.879056199058824e-06, 'num_leaves': 59, 'feature_fraction': 0.7533995302393965, 'bagging_fraction': 0.7996282240412196, 'bagging_freq': 4, 'min_child_samples': 100}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:21:34,839] Trial 27 finished with value: 0.4295656718922354 and parameters: {'lambda_l1': 0.0048410005331588225, 'lambda_l2': 5.9296277710131687e-08, 'num_leaves': 102, 'feature_fraction': 0.8502308387163937, 'bagging_fraction': 0.5806817947981155, 'bagging_freq': 5, 'min_child_samples': 53}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:21:54,700] Trial 28 finished with value: 0.4387527074643033 and parameters: {'lambda_l1': 8.070641956447589e-08, 'lambda_l2': 5.888598047660438e-06, 'num_leaves': 38, 'feature_fraction': 0.8205094911878436, 'bagging_fraction': 0.8902598656367897, 'bagging_freq': 6, 'min_child_samples': 23}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:22:30,844] Trial 29 finished with value: 0.4347543385380114 and parameters: {'lambda_l1': 1.2119849067507703e-07, 'lambda_l2': 0.00014053196129393267, 'num_leaves': 36, 'feature_fraction': 0.8362570945122446, 'bagging_fraction': 0.8901040226614029, 'bagging_freq': 7, 'min_child_samples': 24}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:22:59,249] Trial 30 finished with value: 0.43430373696025615 and parameters: {'lambda_l1': 7.602390984443001e-05, 'lambda_l2': 0.0008416676019439847, 'num_leaves': 64, 'feature_fraction': 0.8866564526854047, 'bagging_fraction': 0.7350729971360783, 'bagging_freq': 2, 'min_child_samples': 17}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:23:06,158] Trial 31 finished with value: 0.4363088058601464 and parameters: {'lambda_l1': 1.1135260582895277e-08, 'lambda_l2': 5.729204725701175e-06, 'num_leaves': 3, 'feature_fraction': 0.8211377359862053, 'bagging_fraction': 0.9580151538943594, 'bagging_freq': 6, 'min_child_samples': 42}. Best is trial 18 with value: 0.4391493109614636.
+[I 2025-07-31 19:23:23,467] Trial 32 finished with value: 0.44066744197144037 and parameters: {'lambda_l1': 1.6141885791472698e-07, 'lambda_l2': 4.787911261774196e-05, 'num_leaves': 17, 'feature_fraction': 0.7000020681751158, 'bagging_fraction': 0.831355267451953, 'bagging_freq': 5, 'min_child_samples': 5}. Best is trial 32 with value: 0.44066744197144037.
+[I 2025-07-31 19:23:45,646] Trial 33 finished with value: 0.43027759409692895 and parameters: {'lambda_l1': 2.108588550474588e-07, 'lambda_l2': 3.945734220053663e-05, 'num_leaves': 45, 'feature_fraction': 0.5990250642857463, 'bagging_fraction': 0.824871682018543, 'bagging_freq': 6, 'min_child_samples': 8}. Best is trial 32 with value: 0.44066744197144037.
+[I 2025-07-31 19:24:05,003] Trial 34 finished with value: 0.4380512447107341 and parameters: {'lambda_l1': 3.978562437995408e-06, 'lambda_l2': 0.0007615286854205398, 'num_leaves': 26, 'feature_fraction': 0.6866645767870041, 'bagging_fraction': 0.8876824304306219, 'bagging_freq': 4, 'min_child_samples': 17}. Best is trial 32 with value: 0.44066744197144037.
+[I 2025-07-31 19:24:26,314] Trial 35 finished with value: 0.438178306011521 and parameters: {'lambda_l1': 0.001462157269912886, 'lambda_l2': 9.290764400661625e-05, 'num_leaves': 89, 'feature_fraction': 0.7461437234812873, 'bagging_fraction': 0.826264820443193, 'bagging_freq': 3, 'min_child_samples': 24}. Best is trial 32 with value: 0.44066744197144037.
+[I 2025-07-31 19:25:04,075] Trial 36 finished with value: 0.42906214363230477 and parameters: {'lambda_l1': 4.482903823588791e-06, 'lambda_l2': 0.007480958020448531, 'num_leaves': 49, 'feature_fraction': 0.9792576176633996, 'bagging_fraction': 0.9122220384892719, 'bagging_freq': 7, 'min_child_samples': 6}. Best is trial 32 with value: 0.44066744197144037.
+[I 2025-07-31 19:26:07,117] Trial 37 finished with value: 0.42747208549301 and parameters: {'lambda_l1': 0.00028970131559927643, 'lambda_l2': 0.45105212454777915, 'num_leaves': 207, 'feature_fraction': 0.5400394591687102, 'bagging_fraction': 0.5620826183094955, 'bagging_freq': 5, 'min_child_samples': 14}. Best is trial 32 with value: 0.44066744197144037.
+[I 2025-07-31 19:26:58,041] Trial 38 finished with value: 0.4333697543799039 and parameters: {'lambda_l1': 0.021776310444597352, 'lambda_l2': 4.018869845211085e-05, 'num_leaves': 168, 'feature_fraction': 0.936935408154831, 'bagging_fraction': 0.7377177356488003, 'bagging_freq': 4, 'min_child_samples': 26}. Best is trial 32 with value: 0.44066744197144037.
+[I 2025-07-31 19:27:34,708] Trial 39 finished with value: 0.43450762894637524 and parameters: {'lambda_l1': 3.405780038925032e-07, 'lambda_l2': 0.00028578719830478136, 'num_leaves': 35, 'feature_fraction': 0.6535654372463104, 'bagging_fraction': 0.853435775785208, 'bagging_freq': 7, 'min_child_samples': 47}. Best is trial 32 with value: 0.44066744197144037.
+[I 2025-07-31 19:28:36,650] Trial 40 finished with value: 0.4381767022434386 and parameters: {'lambda_l1': 0.13451199335333053, 'lambda_l2': 1.2303353374973395e-06, 'num_leaves': 66, 'feature_fraction': 0.7094098953408766, 'bagging_fraction': 0.9428911944909658, 'bagging_freq': 6, 'min_child_samples': 33}. Best is trial 32 with value: 0.44066744197144037.
+[I 2025-07-31 19:28:57,210] Trial 41 finished with value: 0.43596771744704144 and parameters: {'lambda_l1': 3.0283706551034876e-08, 'lambda_l2': 4.690021186909561e-06, 'num_leaves': 15, 'feature_fraction': 0.7773179707132664, 'bagging_fraction': 0.9742599932204257, 'bagging_freq': 5, 'min_child_samples': 67}. Best is trial 32 with value: 0.44066744197144037.
+[I 2025-07-31 19:29:09,276] Trial 42 finished with value: 0.44233104075116775 and parameters: {'lambda_l1': 4.946332478396729e-08, 'lambda_l2': 5.973873239518131e-07, 'num_leaves': 17, 'feature_fraction': 0.8892857720746322, 'bagging_fraction': 0.9587196261506866, 'bagging_freq': 5, 'min_child_samples': 41}. Best is trial 42 with value: 0.44233104075116775.
+[I 2025-07-31 19:29:20,427] Trial 43 finished with value: 0.43649918163620355 and parameters: {'lambda_l1': 6.376106199660329e-08, 'lambda_l2': 1.7397670735313326e-05, 'num_leaves': 13, 'feature_fraction': 0.9111954612638318, 'bagging_fraction': 0.9101546359450872, 'bagging_freq': 4, 'min_child_samples': 40}. Best is trial 42 with value: 0.44233104075116775.
+[I 2025-07-31 19:29:46,013] Trial 44 finished with value: 0.43110260371809667 and parameters: {'lambda_l1': 8.232954021949673e-08, 'lambda_l2': 5.783219635152166e-07, 'num_leaves': 38, 'feature_fraction': 0.8771726743740065, 'bagging_fraction': 0.9466159553642757, 'bagging_freq': 5, 'min_child_samples': 58}. Best is trial 42 with value: 0.44233104075116775.
+[I 2025-07-31 19:30:06,011] Trial 45 finished with value: 0.435893306685917 and parameters: {'lambda_l1': 1.685509697328763e-06, 'lambda_l2': 5.832080033959391e-06, 'num_leaves': 54, 'feature_fraction': 0.9658550884768494, 'bagging_fraction': 0.8802611093521133, 'bagging_freq': 6, 'min_child_samples': 28}. Best is trial 42 with value: 0.44233104075116775.
+[I 2025-07-31 19:30:29,992] Trial 46 finished with value: 0.440480657055737 and parameters: {'lambda_l1': 4.3465049728108857e-07, 'lambda_l2': 6.197246216367516e-05, 'num_leaves': 230, 'feature_fraction': 0.8105680531689723, 'bagging_fraction': 0.9617221646282734, 'bagging_freq': 5, 'min_child_samples': 20}. Best is trial 42 with value: 0.44233104075116775.
+[I 2025-07-31 19:30:54,377] Trial 47 finished with value: 0.4347975694267607 and parameters: {'lambda_l1': 2.607825463716989e-07, 'lambda_l2': 6.187636180864822e-05, 'num_leaves': 226, 'feature_fraction': 0.8177340180643775, 'bagging_fraction': 0.9677508097989806, 'bagging_freq': 5, 'min_child_samples': 13}. Best is trial 42 with value: 0.44233104075116775.
+[I 2025-07-31 19:31:18,112] Trial 48 finished with value: 0.4402997292741436 and parameters: {'lambda_l1': 2.643939907994323e-08, 'lambda_l2': 0.0001705401534306939, 'num_leaves': 191, 'feature_fraction': 0.7275331642425971, 'bagging_fraction': 0.9131484976779912, 'bagging_freq': 6, 'min_child_samples': 19}. Best is trial 42 with value: 0.44233104075116775.
+[I 2025-07-31 19:31:40,222] Trial 49 finished with value: 0.42859124700783485 and parameters: {'lambda_l1': 1.0093271512146307e-08, 'lambda_l2': 0.00040062640867744313, 'num_leaves': 223, 'feature_fraction': 0.7222829595127411, 'bagging_fraction': 0.47170807144993887, 'bagging_freq': 5, 'min_child_samples': 19}. Best is trial 42 with value: 0.44233104075116775.
+
+Optimization finished.
+Number of finished trials:  50
+Best trial:
+  Value (F1-score):  0.44233104075116775
+  Params: 
+    lambda_l1: 4.946332478396729e-08
+    lambda_l2: 5.973873239518131e-07
+    num_leaves: 17
+    feature_fraction: 0.8892857720746322
+    bagging_fraction: 0.9587196261506866
+    bagging_freq: 5
+    min_child_samples: 41
+
+
+
+
+
+PS D:\projetos vs\Bank Marketing> python src\train_deep_learning.py
+2025-07-31 19:31:22.596353: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.    
+2025-07-31 19:31:39.664517: I tensorflow/core/util/port.cc:153] oneDNN custom operations are on. You may see slightly different numerical results due to floating-point round-off errors from different computation orders. To turn them off, set the environment variable `TF_ENABLE_ONEDNN_OPTS=0`.    
+Loading preprocessed data...
+2025-07-31 19:31:44.139332: I tensorflow/core/platform/cpu_feature_guard.cc:210] This TensorFlow binary is optimized to use available CPU instructions in performance-critical operations.
+To enable the following instructions: SSE3 SSE4.1 SSE4.2 AVX AVX2 FMA, in other operations, rebuild TensorFlow with the appropriate compiler flags.
+Model: "MLP_Model"
+┏━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━━━━━━━━━━━━━┳━━━━━━━━━━━━━━━━━┓
+┃ Layer (type)                         ┃ Output Shape                ┃         Param # ┃
+┡━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━━━━━━━━━━━━━╇━━━━━━━━━━━━━━━━━┩
+│ Hidden_Layer_1 (Dense)               │ (None, 64)                  │           3,264 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ dropout (Dropout)                    │ (None, 64)                  │               0 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ Hidden_Layer_2 (Dense)               │ (None, 32)                  │           2,080 │
+├──────────────────────────────────────┼─────────────────────────────┼─────────────────┤
+│ Output_Layer (Dense)                 │ (None, 1)                   │              33 │
+└──────────────────────────────────────┴─────────────────────────────┴─────────────────┘
+ Total params: 5,377 (21.00 KB)
+ Trainable params: 5,377 (21.00 KB)
+ Non-trainable params: 0 (0.00 B)
+Model architecture diagram saved to 'results/deep_learning_mlp/model_architecture.png'
+
+Training the MLP model...
+Epoch 1/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 2s 7ms/step - accuracy: 0.8529 - auc: 0.5896 - loss: 0.3943 - val_accuracy: 0.8830 - val_auc: 0.7483 - val_loss: 0.3193
+Epoch 2/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8864 - auc: 0.7301 - loss: 0.3204 - val_accuracy: 0.8898 - val_auc: 0.7658 - val_loss: 0.3040
+Epoch 3/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8881 - auc: 0.7477 - loss: 0.3123 - val_accuracy: 0.8912 - val_auc: 0.7717 - val_loss: 0.2997
+Epoch 4/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8905 - auc: 0.7546 - loss: 0.3076 - val_accuracy: 0.8918 - val_auc: 0.7766 - val_loss: 0.2970
+Epoch 5/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8901 - auc: 0.7644 - loss: 0.3040 - val_accuracy: 0.8917 - val_auc: 0.7794 - val_loss: 0.2956
+Epoch 6/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8901 - auc: 0.7658 - loss: 0.3023 - val_accuracy: 0.8925 - val_auc: 0.7817 - val_loss: 0.2938
+Epoch 7/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8917 - auc: 0.7706 - loss: 0.3009 - val_accuracy: 0.8935 - val_auc: 0.7833 - val_loss: 0.2935
+Epoch 8/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8914 - auc: 0.7727 - loss: 0.2989 - val_accuracy: 0.8922 - val_auc: 0.7841 - val_loss: 0.2926
+Epoch 9/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8917 - auc: 0.7783 - loss: 0.2966 - val_accuracy: 0.8937 - val_auc: 0.7852 - val_loss: 0.2923
+Epoch 10/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8912 - auc: 0.7779 - loss: 0.2965 - val_accuracy: 0.8942 - val_auc: 0.7863 - val_loss: 0.2921
+Epoch 11/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8918 - auc: 0.7808 - loss: 0.2954 - val_accuracy: 0.8938 - val_auc: 0.7883 - val_loss: 0.2909
+Epoch 12/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8912 - auc: 0.7843 - loss: 0.2936 - val_accuracy: 0.8925 - val_auc: 0.7879 - val_loss: 0.2906
+Epoch 13/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8925 - auc: 0.7851 - loss: 0.2937 - val_accuracy: 0.8912 - val_auc: 0.7894 - val_loss: 0.2897
+Epoch 14/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8924 - auc: 0.7864 - loss: 0.2922 - val_accuracy: 0.8917 - val_auc: 0.7900 - val_loss: 0.2895
+Epoch 15/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8924 - auc: 0.7886 - loss: 0.2914 - val_accuracy: 0.8913 - val_auc: 0.7883 - val_loss: 0.2903
+Epoch 16/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 1s 6ms/step - accuracy: 0.8922 - auc: 0.7903 - loss: 0.2911 - val_accuracy: 0.8932 - val_auc: 0.7916 - val_loss: 0.2888
+Epoch 17/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8923 - auc: 0.7921 - loss: 0.2898 - val_accuracy: 0.8913 - val_auc: 0.7916 - val_loss: 0.2886
+Epoch 18/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8933 - auc: 0.7927 - loss: 0.2892 - val_accuracy: 0.8923 - val_auc: 0.7919 - val_loss: 0.2884
+Epoch 19/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8941 - auc: 0.7926 - loss: 0.2893 - val_accuracy: 0.8920 - val_auc: 0.7910 - val_loss: 0.2890
+Epoch 20/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8930 - auc: 0.7943 - loss: 0.2887 - val_accuracy: 0.8943 - val_auc: 0.7923 - val_loss: 0.2898
+Epoch 21/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8931 - auc: 0.7963 - loss: 0.2877 - val_accuracy: 0.8932 - val_auc: 0.7927 - val_loss: 0.2876
+Epoch 22/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8942 - auc: 0.7989 - loss: 0.2859 - val_accuracy: 0.8920 - val_auc: 0.7936 - val_loss: 0.2871
+Epoch 23/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8949 - auc: 0.8006 - loss: 0.2850 - val_accuracy: 0.8930 - val_auc: 0.7924 - val_loss: 0.2880
+Epoch 24/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8935 - auc: 0.8018 - loss: 0.2857 - val_accuracy: 0.8923 - val_auc: 0.7923 - val_loss: 0.2873
+Epoch 25/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8939 - auc: 0.8044 - loss: 0.2843 - val_accuracy: 0.8932 - val_auc: 0.7945 - val_loss: 0.2871
+Epoch 26/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 5ms/step - accuracy: 0.8941 - auc: 0.8004 - loss: 0.2848 - val_accuracy: 0.8915 - val_auc: 0.7937 - val_loss: 0.2878
+Epoch 27/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8936 - auc: 0.8057 - loss: 0.2835 - val_accuracy: 0.8933 - val_auc: 0.7919 - val_loss: 0.2878
+Epoch 28/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8941 - auc: 0.8075 - loss: 0.2825 - val_accuracy: 0.8918 - val_auc: 0.7935 - val_loss: 0.2884
+Epoch 29/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8946 - auc: 0.8073 - loss: 0.2833 - val_accuracy: 0.8933 - val_auc: 0.7915 - val_loss: 0.2885
+Epoch 30/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8945 - auc: 0.8076 - loss: 0.2828 - val_accuracy: 0.8925 - val_auc: 0.7909 - val_loss: 0.2885
+Epoch 31/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8941 - auc: 0.8059 - loss: 0.2832 - val_accuracy: 0.8927 - val_auc: 0.7923 - val_loss: 0.2881
+Epoch 32/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 1s 4ms/step - accuracy: 0.8948 - auc: 0.8071 - loss: 0.2824 - val_accuracy: 0.8930 - val_auc: 0.7912 - val_loss: 0.2885
+Epoch 33/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8938 - auc: 0.8069 - loss: 0.2816 - val_accuracy: 0.8922 - val_auc: 0.7907 - val_loss: 0.2881
+Epoch 34/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8943 - auc: 0.8088 - loss: 0.2813 - val_accuracy: 0.8915 - val_auc: 0.7896 - val_loss: 0.2889
+Epoch 35/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8953 - auc: 0.8104 - loss: 0.2807 - val_accuracy: 0.8917 - val_auc: 0.7914 - val_loss: 0.2881
+Epoch 36/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8944 - auc: 0.8125 - loss: 0.2799 - val_accuracy: 0.8920 - val_auc: 0.7891 - val_loss: 0.2891
+Epoch 37/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8953 - auc: 0.8128 - loss: 0.2796 - val_accuracy: 0.8928 - val_auc: 0.7892 - val_loss: 0.2894
+Epoch 38/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8958 - auc: 0.8148 - loss: 0.2784 - val_accuracy: 0.8928 - val_auc: 0.7873 - val_loss: 0.2897
+Epoch 39/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8947 - auc: 0.8134 - loss: 0.2791 - val_accuracy: 0.8917 - val_auc: 0.7896 - val_loss: 0.2890
+Epoch 40/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8966 - auc: 0.8125 - loss: 0.2800 - val_accuracy: 0.8917 - val_auc: 0.7888 - val_loss: 0.2895
+Epoch 41/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8957 - auc: 0.8139 - loss: 0.2791 - val_accuracy: 0.8920 - val_auc: 0.7904 - val_loss: 0.2910
+Epoch 42/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8956 - auc: 0.8143 - loss: 0.2793 - val_accuracy: 0.8938 - val_auc: 0.7858 - val_loss: 0.2903
+Epoch 43/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8958 - auc: 0.8159 - loss: 0.2779 - val_accuracy: 0.8927 - val_auc: 0.7888 - val_loss: 0.2900
+Epoch 44/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8967 - auc: 0.8190 - loss: 0.2765 - val_accuracy: 0.8925 - val_auc: 0.7890 - val_loss: 0.2893
+Epoch 45/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8963 - auc: 0.8162 - loss: 0.2775 - val_accuracy: 0.8928 - val_auc: 0.7890 - val_loss: 0.2901
+Epoch 46/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 3ms/step - accuracy: 0.8971 - auc: 0.8174 - loss: 0.2764 - val_accuracy: 0.8920 - val_auc: 0.7881 - val_loss: 0.2906
+Epoch 47/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8967 - auc: 0.8213 - loss: 0.2748 - val_accuracy: 0.8920 - val_auc: 0.7860 - val_loss: 0.2911
+Epoch 48/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8969 - auc: 0.8203 - loss: 0.2758 - val_accuracy: 0.8925 - val_auc: 0.7872 - val_loss: 0.2906
+Epoch 49/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8979 - auc: 0.8197 - loss: 0.2753 - val_accuracy: 0.8915 - val_auc: 0.7869 - val_loss: 0.2916
+Epoch 50/50
+95/95 ━━━━━━━━━━━━━━━━━━━━ 0s 4ms/step - accuracy: 0.8958 - auc: 0.8207 - loss: 0.2758 - val_accuracy: 0.8907 - val_auc: 0.7871 - val_loss: 0.2907
+Training history plot saved to 'results/deep_learning_mlp/training_history.png'
+
+Evaluating the model on the test set...
+471/471 ━━━━━━━━━━━━━━━━━━━━ 1s 1ms/step  
+
+Classification Report:
+               precision    recall  f1-score   support
+
+ No (deposit)       0.91      0.98      0.94     13308
+Yes (deposit)       0.62      0.28      0.38      1763
+
+     accuracy                           0.90     15071
+    macro avg       0.76      0.63      0.66     15071
+ weighted avg       0.88      0.90      0.88     15071
+
+
+Classification report saved to 'results/deep_learning_mlp/classification_report.txt'
+Evaluation plots saved to 'results/deep_learning_mlp/evaluation_plots.png'
+
+Saving the trained model...
+Model saved to 'models/deep_learning_mlp/model.keras'
+
+Deep Learning modeling complete!
+
+
+
+
+
+PS D:\projetos vs\Bank Marketing> python src\train_lightgbm.py
+Loading preprocessed data...
+Training final LightGBM model on full training data...
+C:\Users\João Gabriel\AppData\Roaming\Python\Python313\site-packages\joblib\externals\loky\backend\context.py:131: UserWarning: Could not find the number of physical cores for the following reason: 
+[WinError 2] O sistema não pode encontrar o arquivo especificado
+Returning the number of logical cores instead. You can silence this warning by setting LOKY_MAX_CPU_COUNT to the number of cores you want to use.
+  warnings.warn(
+  File "C:\Users\João Gabriel\AppData\Roaming\Python\Python313\site-packages\joblib\externals\loky\backend\context.py", line 247, in _count_physical_cores
+    cpu_count_physical = _count_physical_cores_win32()
+  File "C:\Users\João Gabriel\AppData\Roaming\Python\Python313\site-packages\joblib\externals\loky\backend\context.py", line 299, in _count_physical_cores_win32
+    cpu_info = subprocess.run(
+        "wmic CPU Get NumberOfCores /Format:csv".split(),
+        capture_output=True,
+        text=True,
+    )
+  File "C:\Python313\Lib\subprocess.py", line 554, in run
+    with Popen(*popenargs, **kwargs) as process:
+         ~~~~~^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\subprocess.py", line 1036, in __init__
+    self._execute_child(args, executable, preexec_fn, close_fds,
+    ~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+                        pass_fds, cwd, env,
+                        ^^^^^^^^^^^^^^^^^^^
+    ...<5 lines>...
+                        gid, gids, uid, umask,
+                        ^^^^^^^^^^^^^^^^^^^^^^
+                        start_new_session, process_group)
+                        ^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^^
+  File "C:\Python313\Lib\subprocess.py", line 1548, in _execute_child
+    hp, ht, pid, tid = _winapi.CreateProcess(executable, args,
+                       ~~~~~~~~~~~~~~~~~~~~~^^^^^^^^^^^^^^^^^^
+                             # no special security
+                             ^^^^^^^^^^^^^^^^^^^^^
+    ...<4 lines>...
+                             cwd,
+                             ^^^^
+                             startupinfo)
+                             ^^^^^^^^^^^^
+Finding optimal decision threshold...
+Optimal Threshold: 0.2293
+Max F1-Score at this threshold: 0.4741
+
+Final Model Classification Report (with optimal threshold):
+               precision    recall  f1-score   support
+
+ No (deposit)       0.93      0.92      0.93     13308
+Yes (deposit)       0.45      0.50      0.47      1763
+
+     accuracy                           0.87     15071
+    macro avg       0.69      0.71      0.70     15071
+ weighted avg       0.88      0.87      0.87     15071
+
+
+Classification report saved to 'results/lightgbm_final/classification_report.txt'
+Evaluation plots saved to 'results/lightgbm_final/evaluation_plots.png'
+Saving the final model and optimal threshold...
+Final model saved to 'models/lightgbm_final/model.joblib'
+Optimal threshold saved to 'models/lightgbm_final/optimal_threshold.joblib'
+
+Final optimized modeling complete!
