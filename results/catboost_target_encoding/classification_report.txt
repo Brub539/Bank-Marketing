@@ -1,0 +1,8 @@
+               precision    recall  f1-score   support
+
+ No (deposit)       0.70      0.98      0.82      5698
+Yes (deposit)       0.57      0.07      0.13      2540
+
+     accuracy                           0.70      8238
+    macro avg       0.64      0.52      0.47      8238
+ weighted avg       0.66      0.70      0.60      8238

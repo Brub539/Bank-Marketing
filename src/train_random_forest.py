@@ -7,19 +7,24 @@ import matplotlib.pyplot as plt
 import os
 
 # --- 2. Setup Paths and Directories ---
-MODEL_NAME = 'random_forest'
+MODEL_NAME = 'random_forest_target_encoding'
 RESULTS_DIR = f'results/{MODEL_NAME}'
 MODELS_DIR = f'models/{MODEL_NAME}'
 os.makedirs(RESULTS_DIR, exist_ok=True)
 os.makedirs(MODELS_DIR, exist_ok=True)
 
 # --- 3. Load Processed Data ---
-print("Loading preprocessed data...")
-# (Same data loading logic as before)
-X_train = pd.read_csv('data/processed/X_train_processed.csv')
-X_test = pd.read_csv('data/processed/X_test_processed.csv')
-y_train = pd.read_csv('data/processed/y_train.csv').values.ravel()
-y_test = pd.read_csv('data/processed/y_test.csv').values.ravel()
+print("Loading preprocessed data (TARGET ENCODED)...")
+data_dir = 'data/processed_target_encoding'
+try:
+    X_train = pd.read_csv(f'{data_dir}/X_train_processed.csv')
+    X_test = pd.read_csv(f'{data_dir}/X_test_processed.csv')
+    y_train = pd.read_csv(f'{data_dir}/y_train.csv').values.ravel()
+    y_test = pd.read_csv(f'{data_dir}/y_test.csv').values.ravel()
+except FileNotFoundError:
+    print("Error: Target encoded data not found.")
+    print("Please run 'run_pipeline_target_encoding.py' first.")
+    sys.exit()
 
 # --- 4. Train Random Forest Model ---
 print("Training Random Forest model...")
