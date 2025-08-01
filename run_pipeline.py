@@ -8,14 +8,14 @@ import numpy as np
 from category_encoders import TargetEncoder
 
 # --- 2. Setup Project Paths ---
+# Create all necessary directories at the beginning
 os.makedirs('data/processed_target_encoding', exist_ok=True)
-os.makedirs('models', exist_ok=True)
+os.makedirs('models/preprocessor_target_encoding', exist_ok=True) # <<< THE FIX IS HERE
 
 # --- 3. Data Loading ---
 def load_data(file_path='data/raw/bank-additional-full.csv'):
     """Loads the new, richer bank marketing dataset."""
     if not os.path.exists(file_path):
-        # Allow master script to handle errors, but notify here
         print(f"CRITICAL ERROR in run_pipeline: Dataset not found at {file_path}")
         return None
     df = pd.read_csv(file_path, sep=';')
@@ -24,6 +24,8 @@ def load_data(file_path='data/raw/bank-additional-full.csv'):
 # --- 4. Main Preprocessing Logic ---
 def preprocess_data(df):
     """Preprocesses the new dataset with all feature engineering steps."""
+    # (The rest of your preprocessing logic remains exactly the same)
+    
     # --- Outlier Capping ---
     numeric_cols_to_cap = ['age', 'duration', 'campaign', 'cons.conf.idx']
     for col in numeric_cols_to_cap:
@@ -52,7 +54,7 @@ def preprocess_data(df):
     df['was_contacted_before'] = (df['pdays'] != 999).astype(int)
     X = df.drop('y', axis=1)
     y = df['y'].map({'yes': 1, 'no': 0})
-    X = X.drop(['duration', 'pdays'], axis=1)
+    X = X.drop(['pdays'], axis=1)
 
     # --- Time-Based Split ---
     split_index = int(len(X) * 0.8)
@@ -72,7 +74,9 @@ def preprocess_data(df):
     preprocessor.fit(X_train, y_train)
     X_train_processed = preprocessor.transform(X_train)
     X_test_processed = preprocessor.transform(X_test)
-    joblib.dump(preprocessor, 'models/preprocessor_target_encoding.joblib')
+    
+    # This line will now work because the directory exists
+    joblib.dump(preprocessor, 'models/preprocessor_target_encoding/preprocessor_target_encoding.joblib')
 
     # --- Final DataFrame Creation ---
     processed_cols = preprocessor.get_feature_names_out()

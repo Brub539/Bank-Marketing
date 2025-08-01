@@ -1,0 +1,18 @@
+First test without hyperparametrization or any other techniques. Raw model values.
+
+======================================================================
+FINAL ANALYSIS: Gathering and Comparing All Model Results
+--- Final Model Performance Comparison ---
+Model  Precision (Yes)  Recall (Yes)  F1-Score (Yes)
+0        Tabnet Smote Target Encoding             0.41          0.61            0.49
+1        Logistic Regression Smote Te             0.36          0.56            0.44
+2            Voting Ensemble Smote V2             0.59          0.19            0.29
+3  Lightgbm Rfe Smote Target Encoding             0.57          0.18            0.27
+4          Stacking Ensemble Smote V2             0.57          0.09            0.15
+5            Catboost Target Encoding             0.57          0.07            0.13
+6          Deep Learning Mlp Smote Te             0.14          0.07            0.09
+7       Random Forest Target Encoding             0.49          0.01            0.02
+--- Conclusion ---
+The champion model is 'Tabnet Smote Target Encoding' with a final F1-Score of 0.4900.
+This demonstrates the power of the chosen feature engineering, imbalance handling, and modeling techniques.
+The project is complete and all artifacts (models, results, processed data) are saved.

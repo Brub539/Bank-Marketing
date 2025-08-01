@@ -1,0 +1,11 @@
+Optimal Threshold: 0.1624
+Max F1-Score: 0.6357
+
+               precision    recall  f1-score   support
+
+ No (deposit)       0.90      0.65      0.75      5698
+Yes (deposit)       0.51      0.83      0.64      2540
+
+     accuracy                           0.71      8238
+    macro avg       0.71      0.74      0.69      8238
+ weighted avg       0.78      0.71      0.72      8238

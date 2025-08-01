@@ -32,7 +32,7 @@ except FileNotFoundError:
 # --- 4. Load Best Hyperparameters from File ---
 # <<< THIS IS THE KEY CHANGE >>>
 # Instead of a hardcoded dictionary, we load the results from our tuning notebook.
-best_params_file = 'models/best_lgbm_params.joblib'
+best_params_file = 'models/best_params/best_lgbm_params.joblib'
 try:
     print(f"Loading best hyperparameters from '{best_params_file}'...")
     best_params = joblib.load(best_params_file)
