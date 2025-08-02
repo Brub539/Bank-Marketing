@@ -29,7 +29,7 @@ TRAINING_WORK = {
     'src/train_deep_learning.py': 'models/deep_learning_mlp_tuned/model.keras',
     'src/train_catboost.py': 'models/catboost_target_encoding/model.joblib',
     'src/train_tabnet.py': 'models/tabnet_smote_target_encoding/model.joblib',
-    'src/train_voting_model.py': 'models/voting_ensemble_smote_v2/model.joblib',
+    'src/train_stacking_tuned.py': 'models/stacking_tuned_ensemble_smote_v2/model.joblib',
     'src/train_stacking_model.py': 'models/stacking_ensemble_smote_v2/model.joblib',
     'src/train_lightgbm.py': 'models/lightgbm_rfe_smote_target_encoding/model.joblib'
 }
